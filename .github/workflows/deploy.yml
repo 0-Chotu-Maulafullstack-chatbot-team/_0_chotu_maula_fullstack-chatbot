@@ -1,0 +1,36 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+      - name: Deploy frontend to Vercel
+        working-directory: frontend
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Log in to container registry (placeholder)
+        run: echo "Configure registry login (e.g. docker/login-action) for your environment."
+      - name: Build and push backend image
+        env:
+          REGISTRY_URL: ${{ secrets.CONTAINER_REGISTRY_URL }}
+        run: |
+          IMAGE="${REGISTRY_URL:-registry.example.com/swaroop}/backend:latest"
+          docker build -t "${IMAGE}" ./backend
+          echo "Push placeholder — set CONTAINER_REGISTRY_URL and run: docker push ${IMAGE}"

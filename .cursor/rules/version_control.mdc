@@ -1,0 +1,96 @@
+---
+description: Branching strategy, tagging convention, PR template, and version control rules.
+globs: .github/**/*
+alwaysApply: true
+---
+
+# Version Control Rules -- Swaroop Formulation Industries
+
+## Progressive Branching Strategy
+
+### Levels 1-2 (Beginner / Elementary)
+- Two branches: `main` (stable) and `dev` (active development).
+- Direct commits to `dev`, merge to `main` for releases.
+- Manual git tags on `main` after each milestone.
+
+### Levels 3-4 (Intermediate / Upper Intermediate)
+- GitFlow model:
+  - `main` -- production-ready code.
+  - `develop` -- integration branch.
+  - `feature/<name>` -- new features (branch from `develop`).
+  - `release/<version>` -- release preparation.
+  - `hotfix/<name>` -- urgent fixes (branch from `main`).
+- All merges via Pull Requests with at least one review.
+- Conventional Commits enforced.
+
+### Levels 5-6 (Advanced / Expert)
+- Trunk-based development with feature flags.
+- Short-lived feature branches (max 2 days).
+- Protected `main` branch with required CI checks.
+- Signed commits required.
+- Automated changelog generation from conventional commits.
+
+## Tag Convention
+
+Format: `v{MAJOR}.{MINOR}.{PATCH}-{level-descriptor}`
+
+| Tag | Level | Milestone |
+|---|---|---|
+| `v0.1.0-l1-chatbot-basic` | 1 | Foundation chatbot deployed |
+| `v0.2.0-l2-rag-enabled` | 2 | RAG pipeline with vector search |
+| `v0.3.0-l3-agentic-rag` | 3 | Agentic RAG + certifications page |
+| `v0.4.0-l4-adaptive-dashboards` | 4 | Adaptive RAG + dashboards + ETL |
+| `v0.5.0-l5-full-platform` | 5 | Full platform with GenAI automation |
+| `v1.0.0-l6-production` | 6 | Enterprise production release |
+
+## Pull Request Template
+
+```markdown
+## Summary
+<!-- 1-3 bullet points describing what this PR does -->
+
+## Level
+<!-- Which roadmap level does this belong to? L1-L6 -->
+
+## Type of Change
+- [ ] feat: New feature
+- [ ] fix: Bug fix
+- [ ] docs: Documentation
+- [ ] refactor: Code restructuring
+- [ ] test: Tests
+- [ ] ci: CI/CD
+- [ ] chore: Maintenance
+
+## Checklist
+- [ ] Code follows project conventions (.cursor/rules/project_conventions.mdc)
+- [ ] Documentation updated in both .md and .tex formats
+- [ ] Prompt log updated if AI was used
+- [ ] Environment variables added to .env.example
+- [ ] No secrets committed
+- [ ] Tests pass locally
+```
+
+## .gitignore Essentials
+
+```
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.local
+chroma_db/
+*.egg-info/
+dist/
+build/
+.next/
+.vercel/
+airflow_home/logs/
+*.sqlite3
+.terraform/
+```
+
+## Commit Hooks (Level 3+)
+
+- `pre-commit`: Lint (ESLint + Ruff), format (Prettier + Black).
+- `commit-msg`: Validate conventional commit format.
+- `pre-push`: Run test suite.

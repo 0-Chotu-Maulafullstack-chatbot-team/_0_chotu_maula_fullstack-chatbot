@@ -1,0 +1,83 @@
+---
+description: Convention for logging all AI prompts used during development for reproducibility and audit.
+globs: documentation/prompts_log/**/*
+alwaysApply: false
+---
+
+# Prompt Logging Convention -- Swaroop Formulation Industries
+
+## Purpose
+
+All AI prompts used during development MUST be logged for:
+- **Reproducibility:** Any team member can recreate results.
+- **Audit Trail:** Track what AI-generated content exists in the project.
+- **Knowledge Transfer:** Document prompt engineering decisions.
+- **Version Control:** Link prompts to specific code changes.
+
+## Log File Location
+
+```
+documentation/prompts_log/YYYY-MM-DD_prompts.md
+documentation/prompts_log/YYYY-MM-DD_prompts.tex
+```
+
+One file per day. Both `.md` and `.tex` versions must be maintained.
+
+## Entry Format (Markdown)
+
+```markdown
+## Prompt Log Entry -- [Sequential ID]
+
+- **Timestamp:** YYYY-MM-DDTHH:MM:SS
+- **Level:** L1-Chatbot | L2-RAG | L3-Agentic | L4-Adaptive | L5-Platform | L6-Enterprise
+- **Model:** <provider>/<model-name> (e.g., groq/llama-3-70b, openai/gpt-4o)
+- **Category:** system-prompt | ingestion | agent-tool | scraper | report-gen | debug
+- **Prompt:**
+  ```
+  [Full prompt text here]
+  ```
+- **Context:** [Why this prompt was needed, what problem it solves]
+- **Outcome:** [What the model returned, whether it was accepted/modified]
+- **Files Modified:** [List of files created or changed as a result]
+- **Tokens Used:** [Approximate input/output token count if available]
+```
+
+## Entry Format (LaTeX)
+
+```latex
+\subsection{Prompt Log Entry -- [Sequential ID]}
+\begin{description}
+  \item[Timestamp] YYYY-MM-DDTHH:MM:SS
+  \item[Level] L1-Chatbot
+  \item[Model] groq/llama-3-70b
+  \item[Category] system-prompt
+  \item[Prompt] \begin{lstlisting}
+    [Full prompt text]
+  \end{lstlisting}
+  \item[Context] Why this prompt was needed.
+  \item[Outcome] What the model returned.
+  \item[Files Modified] src/utils/system-prompt.ts
+  \item[Tokens Used] ~500 input / ~200 output
+\end{description}
+```
+
+## Categories
+
+| Category | Description |
+|---|---|
+| `system-prompt` | System prompts for chatbot or agents |
+| `ingestion` | Prompts used during document ingestion or chunking decisions |
+| `agent-tool` | Prompts for agent tool descriptions or routing |
+| `scraper` | Prompts used to parse or clean scraped data |
+| `report-gen` | Prompts for auto-generating reports or documents |
+| `debug` | Prompts used to debug issues |
+| `translation` | Prompts for language translation |
+| `content` | Prompts for generating marketing/social content |
+
+## Rules
+
+1. Log EVERY prompt that produces code or content committed to the repository.
+2. Include the full prompt text -- do not summarize or truncate.
+3. If a prompt is iterated multiple times, log each iteration as a separate entry.
+4. Link each entry to the git commit that contains the resulting changes.
+5. At the end of each week, review the log for patterns and add a summary section.

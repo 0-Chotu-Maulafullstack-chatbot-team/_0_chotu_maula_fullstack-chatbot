@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Level 1: Launch in Edge",
+      "type": "pwa-msedge",
+      "request": "launch",
+      "url": "http://localhost:5173/",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "preLaunchTask": "Run Level 1 (Local Server)"
+    }
+  ]
+}

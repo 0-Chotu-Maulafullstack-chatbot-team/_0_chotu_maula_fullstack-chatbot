@@ -1,0 +1,58 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Bootstrap Portable Node (No Admin)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\bootstrap-node.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Level 1 (Local Server)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\run-level1.ps1"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(ERROR|Error|error)[:\\s]+(.*)$",
+          "severity": 1,
+          "message": 2
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting frontend on http://localhost:5173",
+          "endsPattern": "Local:\\s+http://localhost:5173/"
+        }
+      }
+    },
+    {
+      "label": "Stop Level 1 Servers",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

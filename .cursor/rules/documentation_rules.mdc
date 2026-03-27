@@ -1,0 +1,81 @@
+---
+description: Rules for maintaining dual .md/.tex documentation format and folder structure.
+globs: documentation/**/*
+alwaysApply: false
+---
+
+# Documentation Rules -- Swaroop Formulation Industries
+
+## Dual Format Requirement
+
+Every documentation file MUST exist in both formats with identical content:
+1. **Markdown** (`.md`) -- for GitHub rendering, quick reading, and web display.
+2. **LaTeX** (`.tex`) -- for professional PDF generation and academic/investor presentations.
+
+When creating or updating documentation, ALWAYS update BOTH files simultaneously.
+
+## Folder Structure
+
+```
+documentation/
+  00_project_overview/
+    project_overview.md
+    project_overview.tex
+  01_level1_chatbot/
+    level1_guide.md
+    level1_guide.tex
+  02_level2_rag/
+    level2_guide.md
+    level2_guide.tex
+  03_level3_agentic/
+    level3_guide.md
+    level3_guide.tex
+  04_level4_adaptive/
+    level4_guide.md
+    level4_guide.tex
+  05_level5_platform/
+    level5_guide.md
+    level5_guide.tex
+  06_level6_enterprise/
+    level6_guide.md
+    level6_guide.tex
+  architecture/
+    architecture.md
+    architecture.tex
+  deployment/
+    deployment_guide.md
+    deployment_guide.tex
+  data_strategy/
+    data_scraping_etl.md
+    data_scraping_etl.tex
+  prompts_log/
+    YYYY-MM-DD_prompts.md
+    YYYY-MM-DD_prompts.tex
+```
+
+## Naming Convention
+
+- Folder names: `NN_descriptive_name` (zero-padded number prefix for ordering).
+- File names: `snake_case` matching the folder purpose.
+- Each folder contains exactly one `.md` and one `.tex` file (plus optional images in `assets/`).
+
+## Content Standards
+
+### Markdown Files
+- Use ATX-style headings (`#`, `##`, `###`).
+- Use fenced code blocks with language tags.
+- Include a YAML front-matter block with title, date, level, and author.
+- Tables use GitHub Flavored Markdown pipe syntax.
+
+### LaTeX Files
+- Use `\documentclass{article}` with `12pt, a4paper`.
+- Standard packages: `hyperref`, `listings`, `graphicx`, `booktabs`, `geometry`.
+- Listings for code blocks with appropriate language highlighting.
+- Match the heading hierarchy to the Markdown version.
+
+## When to Update Documentation
+
+- After completing any level milestone.
+- After adding new scraping sources or ETL pipelines.
+- After modifying architecture or deployment topology.
+- After any prompt engineering session (update prompts_log).
