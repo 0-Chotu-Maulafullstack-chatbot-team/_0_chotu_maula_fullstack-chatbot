@@ -1,4 +1,11 @@
 ## update readme
+1. git init
+2. git add .
+3. git commit -m "Initial commit"
+4. git branch -M main
+5. git push -u origin main
+6. git remote set-url origin https://github.com/0-Chotu-Maulafullstack-chatbot-team/_0_chotu_maula_fullstack-chatbot.git
+
 # Swaroop Formulation Industries -- Website Platform
 
 A progressive web platform for **Swaroop Formulation Industries Pvt. Ltd.**, a manufacturer of biodegradable PLA-based plastic bags and bio-medical compostable waste bags based in Unnao, Uttar Pradesh, India.
