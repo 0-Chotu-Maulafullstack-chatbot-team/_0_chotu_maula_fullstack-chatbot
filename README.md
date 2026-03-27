@@ -1,3 +1,7 @@
+## How to run this on vscode
+### create uv environment using command: uv venv then activate the same in cmd not powershell and then create requirement.txt
+
+
 # Swaroop Formulation Industries -- Website Platform
 
 A progressive web platform for **Swaroop Formulation Industries Pvt. Ltd.**, a manufacturer of biodegradable PLA-based plastic bags and bio-medical compostable waste bags based in Unnao, Uttar Pradesh, India.
