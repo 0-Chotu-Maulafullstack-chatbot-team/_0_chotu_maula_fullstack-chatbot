@@ -1,10 +1,6 @@
-## update readme
-1. git init
-2. git add .
-3. git commit -m "Initial commit"
-4. git branch -M main
-5. git push -u origin main
-6. git remote set-url origin https://github.com/0-Chotu-Maulafullstack-chatbot-team/_0_chotu_maula_fullstack-chatbot.git
+## How to run this on vscode
+### create uv environment using command: uv venv then activate the same in cmd not powershell and then create requirement.txt
+
 
 # Swaroop Formulation Industries -- Website Platform
 
