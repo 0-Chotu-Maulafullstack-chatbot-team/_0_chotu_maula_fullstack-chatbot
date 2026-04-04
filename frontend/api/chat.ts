@@ -5,7 +5,8 @@ interface ChatResponse {
 
 export default async function chatAPI(messages: { role: string; content: string }[]): Promise<ChatResponse> {
   try {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8001";
+    //const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8001";
+    const API_URL = import.meta.env.VITE_API_URL || "";
 
     const response = await fetch(`${API_URL}/api/chat`, {
       method: "POST",
