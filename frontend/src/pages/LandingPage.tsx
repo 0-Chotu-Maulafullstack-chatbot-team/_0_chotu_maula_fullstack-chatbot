@@ -5,6 +5,8 @@ const certifications = [
     certNo: "QSR/QS/2603392923",
     issued: "23-03-2026",
     expiry: "22-03-2029",
+    imageSrc: "/certificates/C_1.png",
+    imageAlt: "ISO 9001:2015 certificate (Swaroop Formulation Industries)",
   },
   {
     standard: "ISO 13485:2016",
@@ -12,6 +14,8 @@ const certifications = [
     certNo: "IN01232718",
     issued: "25-03-2026",
     expiry: "24-03-2029",
+    imageSrc: "/certificates/C_2.png",
+    imageAlt: "ISO 13485:2016 certificate (Swaroop Formulation Industries)",
   },
 ];
 
@@ -39,7 +43,9 @@ export default function LandingPage() {
             <a href="#about" className="hover:text-swaroop-700 transition">About</a>
             <a href="#products" className="hover:text-swaroop-700 transition">Products</a>
             <a href="#financials" className="hover:text-swaroop-700 transition">Financials</a>
+            <a href="#/subsidiaries" className="hover:text-swaroop-700 transition">Subsidiaries</a>
             <a href="#/certifications" className="hover:text-swaroop-700 transition">Certifications</a>
+            <a href="#/contact-email" className="hover:text-swaroop-700 transition">Email</a>
             <a href="#contact" className="hover:text-swaroop-700 transition">Contact</a>
           </div>
         </div>
@@ -224,36 +230,57 @@ export default function LandingPage() {
             {certifications.map((cert) => (
               <div
                 key={cert.certNo}
-                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+                className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-10 h-10 flex items-center justify-center bg-swaroop-100 text-swaroop-700 rounded-full font-bold text-xs">
-                    ISO
-                  </span>
-                  <div>
-                    <p className="font-bold text-gray-900">{cert.standard}</p>
-                    <p className="text-xs text-gray-500">{cert.title}</p>
+                <a
+                  href={cert.imageSrc}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-gray-50 border-b border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-swaroop-500"
+                >
+                  <img
+                    src={cert.imageSrc}
+                    alt={cert.imageAlt}
+                    className="w-full h-auto object-contain max-h-56 bg-white"
+                    loading="lazy"
+                  />
+                </a>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 flex items-center justify-center bg-swaroop-100 text-swaroop-700 rounded-full font-bold text-xs">
+                      ISO
+                    </span>
+                    <div>
+                      <p className="font-bold text-gray-900">{cert.standard}</p>
+                      <p className="text-xs text-gray-500">{cert.title}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-1 text-sm text-gray-600">
-                  <p>
-                    <span className="font-medium text-gray-700">
-                      Certificate:
-                    </span>{" "}
-                    {cert.certNo}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Issued:</span>{" "}
-                    {cert.issued}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Expiry:</span>{" "}
-                    {cert.expiry}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Scope: Manufacturing of Plastic Bio Medical and Bio
-                    Degradable Compostable Waste Bags and Other Packaging Goods
-                  </p>
+                  <div className="space-y-1 text-sm text-gray-600">
+                    <p>
+                      <span className="font-medium text-gray-700">
+                        Certificate:
+                      </span>{" "}
+                      {cert.certNo}
+                    </p>
+                    <p>
+                      <span className="font-medium text-gray-700">Issued:</span>{" "}
+                      {cert.issued}
+                    </p>
+                    <p>
+                      <span className="font-medium text-gray-700">Expiry:</span>{" "}
+                      {cert.expiry}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Scope: Manufacturing of Plastic Bio Medical and Bio
+                      Degradable Compostable Waste Bags and Other Packaging Goods
+                    </p>
+                  </div>
+                  <a
+                    href="#/certifications"
+                    className="mt-4 text-sm font-semibold text-swaroop-700 hover:text-swaroop-800"
+                  >
+                    Full certification page →
+                  </a>
                 </div>
               </div>
             ))}
