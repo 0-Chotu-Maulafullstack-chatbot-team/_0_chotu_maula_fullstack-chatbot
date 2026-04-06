@@ -1,72 +1,32 @@
-/**
- * Vercel Serverless Function -- proxies chat requests to Groq API.
- * Keeps API keys server-side. Used in Level 1 (direct LLM) and as
- * fallback before the FastAPI backend is introduced in Level 2.
- */
-
-interface GroqRequest {
-  messages: { role: string; content: string }[];
+interface ChatResponse {
+  reply: string;
+  sources?: any[];
 }
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
-    return new Response(
-      JSON.stringify({ error: "GROQ_API_KEY not configured" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
-  }
-
+export default async function chatAPI(messages: { role: string; content: string }[]): Promise<ChatResponse> {
   try {
-    const body: GroqRequest = await req.json();
+    //const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8001";
+    const API_URL = import.meta.env.VITE_API_URL || "";
 
-    const groqRes = await fetch(
-      "https://api.groq.com/openai/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: body.messages,
-          temperature: 0.7,
-          max_tokens: 1024,
-        }),
-      }
-    );
+    const response = await fetch(`${API_URL}/api/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messages }),
+    });
 
-    if (!groqRes.ok) {
-      const errText = await groqRes.text();
-      return new Response(
-        JSON.stringify({ error: "Groq API error", details: errText }),
-        { status: groqRes.status, headers: { "Content-Type": "application/json" } }
-      );
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("Chat API error:", errText);
+      return { reply: "Error: Chat API failed" };
     }
 
-    const data = await groqRes.json();
-    const reply = data.choices?.[0]?.message?.content ?? "No response.";
+    const data: ChatResponse = await response.json();
+    return data;
 
-    return new Response(JSON.stringify({ reply }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
   } catch (err) {
-    return new Response(
-      JSON.stringify({ error: "Internal error", details: String(err) }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    console.error("Chat API fetch error:", err);
+    return { reply: "Error: Unable to reach Chat API" };
   }
 }
-
-export const config = {
-  runtime: "edge",
-};

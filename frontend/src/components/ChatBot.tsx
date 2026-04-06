@@ -8,7 +8,7 @@ export default function ChatBot() {
     {
       role: "assistant",
       content:
-        "Hello! I'm the Swaroop AI assistant. Ask me about our biodegradable packaging, certifications, financials, or PLA technology.",
+        "Hello! I'm the Zyrowaste AI assistant. Ask me about our biodegradable packaging, certifications, financials, or PLA technology.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -62,7 +62,7 @@ export default function ChatBot() {
           {/* Header */}
           <div className="px-4 py-3 bg-swaroop-700 text-white flex items-center gap-2">
             <img src="/leaf.svg" alt="" className="w-5 h-5 brightness-200" />
-            <span className="font-semibold text-sm">Swaroop AI Assistant</span>
+            <span className="font-semibold text-sm">Zyrowaste AI Assistant</span>
           </div>
 
           {/* Messages */}
@@ -107,7 +107,7 @@ export default function ChatBot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Ask about Swaroop..."
+              placeholder="Ask about Zyrowaste..."
               className="flex-1 text-sm px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-swaroop-300"
               disabled={loading}
             />

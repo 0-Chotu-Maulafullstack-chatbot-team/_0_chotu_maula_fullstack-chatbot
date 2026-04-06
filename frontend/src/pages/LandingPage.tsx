@@ -1,3 +1,6 @@
+import { BrandMark } from "../components/BrandMark";
+import { BRAND_NAME, BRAND_TAGLINE, LEGAL_ENTITY } from "../constants/brand";
+
 const certifications = [
   {
     standard: "ISO 9001:2015",
@@ -5,6 +8,8 @@ const certifications = [
     certNo: "QSR/QS/2603392923",
     issued: "23-03-2026",
     expiry: "22-03-2029",
+    imageSrc: "/certificates/C_1.png",
+    imageAlt: "ISO 9001:2015 certificate (Swaroop Formulation Industries)",
   },
   {
     standard: "ISO 13485:2016",
@@ -12,6 +17,8 @@ const certifications = [
     certNo: "IN01232718",
     issued: "25-03-2026",
     expiry: "24-03-2029",
+    imageSrc: "/certificates/C_2.png",
+    imageAlt: "ISO 13485:2016 certificate (Swaroop Formulation Industries)",
   },
 ];
 
@@ -29,17 +36,15 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src="/leaf.svg" alt="" className="w-7 h-7" />
-            <span className="font-bold text-lg text-swaroop-800">
-              Swaroop Formulation Industries
-            </span>
-          </div>
-          <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+          <BrandMark size="md" />
+          <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600 items-center">
             <a href="#about" className="hover:text-swaroop-700 transition">About</a>
             <a href="#products" className="hover:text-swaroop-700 transition">Products</a>
             <a href="#financials" className="hover:text-swaroop-700 transition">Financials</a>
+            <a href="#/subsidiaries" className="hover:text-swaroop-700 transition">Subsidiaries</a>
             <a href="#/certifications" className="hover:text-swaroop-700 transition">Certifications</a>
+            <a href="#/contact-email" className="hover:text-swaroop-700 transition">Email</a>
+            <a href="#/signin" className="hover:text-swaroop-700 transition">Sign in</a>
             <a href="#contact" className="hover:text-swaroop-700 transition">Contact</a>
           </div>
         </div>
@@ -49,16 +54,17 @@ export default function LandingPage() {
       <header className="relative overflow-hidden bg-gradient-to-br from-swaroop-50 via-white to-emerald-50">
         <div className="max-w-6xl mx-auto px-4 py-24 md:py-32 text-center">
           <span className="inline-block px-3 py-1 mb-4 text-xs font-semibold text-swaroop-700 bg-swaroop-100 rounded-full">
-            Biodegradable Packaging Solutions
+            {BRAND_NAME} · {BRAND_TAGLINE}
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6">
-            Manufacturing a{" "}
-            <span className="text-swaroop-600">Greener Future</span>
+            <span className="text-swaroop-700">{BRAND_NAME}</span>
+            {" — "}
+            Manufacturing a <span className="text-swaroop-600">Greener Future</span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-8">
             PLA-based biodegradable plastic bags for groceries, food packaging,
-            agricultural mulch films, and biomedical applications. Certified,
-            compostable, and export-ready.
+            agricultural mulch films, and biomedical applications — brought to you by{" "}
+            {LEGAL_ENTITY}. Certified, compostable, and export-ready.
           </p>
           <div className="flex gap-4 justify-center">
             <a
@@ -224,36 +230,57 @@ export default function LandingPage() {
             {certifications.map((cert) => (
               <div
                 key={cert.certNo}
-                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+                className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-10 h-10 flex items-center justify-center bg-swaroop-100 text-swaroop-700 rounded-full font-bold text-xs">
-                    ISO
-                  </span>
-                  <div>
-                    <p className="font-bold text-gray-900">{cert.standard}</p>
-                    <p className="text-xs text-gray-500">{cert.title}</p>
+                <a
+                  href={cert.imageSrc}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-gray-50 border-b border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-swaroop-500"
+                >
+                  <img
+                    src={cert.imageSrc}
+                    alt={cert.imageAlt}
+                    className="w-full h-auto object-contain max-h-56 bg-white"
+                    loading="lazy"
+                  />
+                </a>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 flex items-center justify-center bg-swaroop-100 text-swaroop-700 rounded-full font-bold text-xs">
+                      ISO
+                    </span>
+                    <div>
+                      <p className="font-bold text-gray-900">{cert.standard}</p>
+                      <p className="text-xs text-gray-500">{cert.title}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-1 text-sm text-gray-600">
-                  <p>
-                    <span className="font-medium text-gray-700">
-                      Certificate:
-                    </span>{" "}
-                    {cert.certNo}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Issued:</span>{" "}
-                    {cert.issued}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Expiry:</span>{" "}
-                    {cert.expiry}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Scope: Manufacturing of Plastic Bio Medical and Bio
-                    Degradable Compostable Waste Bags and Other Packaging Goods
-                  </p>
+                  <div className="space-y-1 text-sm text-gray-600">
+                    <p>
+                      <span className="font-medium text-gray-700">
+                        Certificate:
+                      </span>{" "}
+                      {cert.certNo}
+                    </p>
+                    <p>
+                      <span className="font-medium text-gray-700">Issued:</span>{" "}
+                      {cert.issued}
+                    </p>
+                    <p>
+                      <span className="font-medium text-gray-700">Expiry:</span>{" "}
+                      {cert.expiry}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Scope: Manufacturing of Plastic Bio Medical and Bio
+                      Degradable Compostable Waste Bags and Other Packaging Goods
+                    </p>
+                  </div>
+                  <a
+                    href="#/certifications"
+                    className="mt-4 text-sm font-semibold text-swaroop-700 hover:text-swaroop-800"
+                  >
+                    Full certification page →
+                  </a>
                 </div>
               </div>
             ))}
@@ -270,7 +297,8 @@ export default function LandingPage() {
             India&apos;s transition to eco-friendly packaging.
           </p>
           <div className="text-sm text-swaroop-300 space-y-1">
-            <p>Swaroop Formulation Industries Pvt. Ltd.</p>
+            <p className="font-semibold text-white">{BRAND_NAME}</p>
+            <p>{LEGAL_ENTITY}</p>
             <p>Chukkusehri, Hasanganj, Unnao, Uttar Pradesh 209841, India</p>
           </div>
         </div>
@@ -278,8 +306,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="py-4 bg-gray-900 text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} Swaroop Formulation Industries Pvt.
-        Ltd. All rights reserved.
+        &copy; {new Date().getFullYear()} {BRAND_NAME} · {LEGAL_ENTITY}. All rights reserved.
       </footer>
     </div>
   );

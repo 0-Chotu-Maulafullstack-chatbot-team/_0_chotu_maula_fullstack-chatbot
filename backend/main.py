@@ -1,11 +1,13 @@
-"""FastAPI entrypoint: health, chat (RAG), and vector store warmup."""
+"""FastAPI entrypoint: health, chat (RAG), auth, and vector store warmup."""
 
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from auth_router import router as auth_router
 from config import get_settings
+from db.session import init_db
 from models import ChatRequest, ChatResponse, HealthResponse, SourceDoc
 from rag.chain import get_rag_response
 from rag.vectorstore import get_vectorstore
@@ -15,11 +17,12 @@ APP_VERSION = "0.2.0-l2-rag"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    init_db()
     get_vectorstore()
     yield
 
 
-app = FastAPI(title="Swaroop RAG API", version=APP_VERSION, lifespan=lifespan)
+app = FastAPI(title="Zyrowaste / Swaroop RAG API", version=APP_VERSION, lifespan=lifespan)
 
 _settings = get_settings()
 app.add_middleware(
@@ -29,6 +32,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 
 
 @app.get("/api/health", response_model=HealthResponse)
