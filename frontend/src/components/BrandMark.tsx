@@ -12,7 +12,7 @@ type BrandMarkProps = {
 const sizeClasses = {
   sm: "h-8 w-8 sm:h-9 sm:w-9",
   md: "h-9 w-9 sm:h-10 sm:w-10",
-  lg: "h-20 w-20 sm:h-24 sm:w-24",
+  lg: "h-28 w-28 sm:h-36 sm:w-36",
 };
 
 /**
@@ -21,7 +21,7 @@ const sizeClasses = {
 export function BrandMark({
   size = "lg",
   showWordmark = false,
-  className="scale-200",
+  className="",
   clickable = true,
 }: BrandMarkProps) {
   const [useFallback, setUseFallback] = useState(false);
@@ -30,7 +30,7 @@ export function BrandMark({
   const content = (
     <>
       <span
-        className={`shrink-0 rounded-full overflow-hidden ring-2 ring-swaroop-100 bg-swaroop-900 ${sizeClasses[size]}`}
+        className={`shrink-0 rounded-full overflow-hidden ring-4 ring-green-200 shadow-lg bg-white ${sizeClasses[size]}`}
       >
         <img
           src={src}
@@ -53,7 +53,7 @@ export function BrandMark({
 
   if (!clickable) {
     return (
-      <div className={`flex items-center gap-2 min-w-0 ${className}`}>
+      <div className={`flex flex-col items-center gap-4 ${className}`}>
         {content}
       </div>
     );
