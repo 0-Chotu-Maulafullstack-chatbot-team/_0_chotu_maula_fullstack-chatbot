@@ -71,7 +71,7 @@ export default function AnalyticsPage() {
           </p>
           <h1 className="text-3xl font-bold text-swaroop-900">Analytics &amp; projections</h1>
           <p className="text-gray-600 max-w-3xl">
-            Hardcoded snapshot aligned with the Swaroop project report: five-year operating
+            Hardcoded snapshot aligned with the Zyrowaste / Swaroop project report: five-year operating
             performance, CAPEX split, sensitivity, ROI progression, and a qualitative risk matrix.
           </p>
         </header>

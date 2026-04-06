@@ -1,3 +1,6 @@
+import { BrandMark } from "../components/BrandMark";
+import { BRAND_NAME, BRAND_TAGLINE, LEGAL_ENTITY } from "../constants/brand";
+
 const certifications = [
   {
     standard: "ISO 9001:2015",
@@ -33,19 +36,15 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src="/leaf.svg" alt="" className="w-7 h-7" />
-            <span className="font-bold text-lg text-swaroop-800">
-              Swaroop Formulation Industries
-            </span>
-          </div>
-          <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+          <BrandMark size="md" />
+          <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600 items-center">
             <a href="#about" className="hover:text-swaroop-700 transition">About</a>
             <a href="#products" className="hover:text-swaroop-700 transition">Products</a>
             <a href="#financials" className="hover:text-swaroop-700 transition">Financials</a>
             <a href="#/subsidiaries" className="hover:text-swaroop-700 transition">Subsidiaries</a>
             <a href="#/certifications" className="hover:text-swaroop-700 transition">Certifications</a>
             <a href="#/contact-email" className="hover:text-swaroop-700 transition">Email</a>
+            <a href="#/signin" className="hover:text-swaroop-700 transition">Sign in</a>
             <a href="#contact" className="hover:text-swaroop-700 transition">Contact</a>
           </div>
         </div>
@@ -55,16 +54,17 @@ export default function LandingPage() {
       <header className="relative overflow-hidden bg-gradient-to-br from-swaroop-50 via-white to-emerald-50">
         <div className="max-w-6xl mx-auto px-4 py-24 md:py-32 text-center">
           <span className="inline-block px-3 py-1 mb-4 text-xs font-semibold text-swaroop-700 bg-swaroop-100 rounded-full">
-            Biodegradable Packaging Solutions
+            {BRAND_NAME} · {BRAND_TAGLINE}
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6">
-            Manufacturing a{" "}
-            <span className="text-swaroop-600">Greener Future</span>
+            <span className="text-swaroop-700">{BRAND_NAME}</span>
+            {" — "}
+            Manufacturing a <span className="text-swaroop-600">Greener Future</span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-8">
             PLA-based biodegradable plastic bags for groceries, food packaging,
-            agricultural mulch films, and biomedical applications. Certified,
-            compostable, and export-ready.
+            agricultural mulch films, and biomedical applications — brought to you by{" "}
+            {LEGAL_ENTITY}. Certified, compostable, and export-ready.
           </p>
           <div className="flex gap-4 justify-center">
             <a
@@ -297,7 +297,8 @@ export default function LandingPage() {
             India&apos;s transition to eco-friendly packaging.
           </p>
           <div className="text-sm text-swaroop-300 space-y-1">
-            <p>Swaroop Formulation Industries Pvt. Ltd.</p>
+            <p className="font-semibold text-white">{BRAND_NAME}</p>
+            <p>{LEGAL_ENTITY}</p>
             <p>Chukkusehri, Hasanganj, Unnao, Uttar Pradesh 209841, India</p>
           </div>
         </div>
@@ -305,8 +306,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="py-4 bg-gray-900 text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} Swaroop Formulation Industries Pvt.
-        Ltd. All rights reserved.
+        &copy; {new Date().getFullYear()} {BRAND_NAME} · {LEGAL_ENTITY}. All rights reserved.
       </footer>
     </div>
   );

@@ -36,8 +36,8 @@ export default function SubsidiariesPage() {
           </p>
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">Subsidiaries</h1>
           <p className="mt-3 text-gray-600">
-            Swaroop Formulation Industries is the operating manufacturer; Zyrowaste and Anand Meditrade
-            represent brand and trade channels in line with project conventions.
+            Zyrowaste is the customer-facing brand; Swaroop Formulation Industries is the operating manufacturer;
+            Anand Meditrade represents the medical trade channel.
           </p>
         </header>
 
@@ -63,7 +63,7 @@ export default function SubsidiariesPage() {
       </main>
 
       <footer className="py-6 text-center text-xs text-gray-500 border-t border-gray-100 bg-white">
-        Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
+        Zyrowaste · Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
       </footer>
     </div>
   );

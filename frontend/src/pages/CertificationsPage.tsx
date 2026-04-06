@@ -41,8 +41,8 @@ export default function CertificationsPage() {
             Certifications
           </h1>
           <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-            Swaroop Formulation Industries maintains internationally recognized quality
-            certifications for manufacturing of biodegradable and biomedical packaging.
+            Zyrowaste / Swaroop Formulation Industries maintains internationally recognized
+            quality certifications for manufacturing of biodegradable and biomedical packaging.
           </p>
         </header>
 
@@ -181,7 +181,7 @@ export default function CertificationsPage() {
       </main>
 
       <footer className="py-6 text-center text-xs text-gray-500 border-t border-gray-100 bg-white">
-        Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
+        Zyrowaste · Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
       </footer>
     </div>
   );

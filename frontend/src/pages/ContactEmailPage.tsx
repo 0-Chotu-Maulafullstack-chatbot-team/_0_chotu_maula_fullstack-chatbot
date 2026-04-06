@@ -137,7 +137,7 @@ export default function ContactEmailPage() {
       </main>
 
       <footer className="py-6 text-center text-xs text-gray-500 border-t border-gray-100 bg-white">
-        Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
+        Zyrowaste · Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
       </footer>
     </div>
   );
