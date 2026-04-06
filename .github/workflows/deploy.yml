@@ -1,36 +1,65 @@
-name: Deploy
+name: Deploy Full App
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
+
   deploy-frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          node-version: "20"
-      - name: Install Vercel CLI
-        run: npm install -g vercel@latest
-      - name: Deploy frontend to Vercel
-        working-directory: frontend
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build & Push Frontend
+        run: |
+          docker build -t frontend ./frontend
+          docker tag frontend:latest ${{ secrets.ECR_FRONTEND }}
+          docker push ${{ secrets.ECR_FRONTEND }}
+
+      - name: Deploy Frontend
+        run: |
+          aws ecs update-service \
+            --cluster ${{ secrets.CLUSTER_NAME }} \
+            --service ${{ secrets.FRONTEND_SERVICE }} \
+            --force-new-deployment
+
 
   deploy-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Log in to container registry (placeholder)
-        run: echo "Configure registry login (e.g. docker/login-action) for your environment."
-      - name: Build and push backend image
-        env:
-          REGISTRY_URL: ${{ secrets.CONTAINER_REGISTRY_URL }}
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build & Push Backend
         run: |
-          IMAGE="${REGISTRY_URL:-registry.example.com/swaroop}/backend:latest"
-          docker build -t "${IMAGE}" ./backend
-          echo "Push placeholder — set CONTAINER_REGISTRY_URL and run: docker push ${IMAGE}"
+          docker build -t backend ./backend
+          docker tag backend:latest ${{ secrets.ECR_BACKEND }}
+          docker push ${{ secrets.ECR_BACKEND }}
+
+      - name: Deploy Backend
+        run: |
+          aws ecs update-service \
+            --cluster ${{ secrets.CLUSTER_NAME }} \
+            --service ${{ secrets.BACKEND_SERVICE }} \
+            --force-new-deployment
