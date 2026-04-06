@@ -4,10 +4,28 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from sqlalchemy import DateTime, Float, String, Text
+from sqlalchemy import DateTime, Float, String, Text, func
 from sqlalchemy.orm import Mapped, declarative_base, mapped_column
 
 Base = declarative_base()
+
+
+class User(Base):
+    """Registered web users (signup / login, password reset)."""
+
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
+    mobile: Mapped[str] = mapped_column(String(32), unique=True, nullable=False, index=True)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        nullable=False,
+    )
+    reset_token_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    reset_token_expires: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class MarketPrice(Base):

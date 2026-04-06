@@ -21,6 +21,17 @@ class Settings(BaseSettings):
     )
     llm_model: str = Field(default="llama-3.3-70b-versatile", alias="LLM_MODEL")
     cors_origins: str = Field(default="http://localhost:5173", alias="CORS_ORIGINS")
+    jwt_secret: str = Field(
+        default="dev-only-change-JWT_SECRET-in-production",
+        alias="JWT_SECRET",
+    )
+    jwt_algorithm: str = Field(default="HS256", alias="JWT_ALGORITHM")
+    access_token_expire_minutes: int = Field(default=10080, alias="ACCESS_TOKEN_EXPIRE_MINUTES")
+    password_reset_expire_minutes: int = Field(default=60, alias="PASSWORD_RESET_EXPIRE_MINUTES")
+    auth_debug_return_reset_token: bool = Field(
+        default=False,
+        alias="AUTH_DEBUG_RETURN_RESET_TOKEN",
+    )
 
     @computed_field  # type: ignore[prop-decorator]
     @property

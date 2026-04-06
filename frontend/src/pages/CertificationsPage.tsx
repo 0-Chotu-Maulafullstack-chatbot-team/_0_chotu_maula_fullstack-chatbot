@@ -9,8 +9,9 @@ const certifications = [
     scope:
       "Manufacturing of plastic bio-medical and bio-degradable compostable waste bags and other packaging goods",
     body: "QSR (Quality System Registrars)",
-    pdfLabel: "Certificate PDF",
-    pdfHref: "#",
+    verifyUrl: "https://www.qsrcerti.com",
+    imageSrc: "/certificates/C_1.png",
+    imageAlt: "ISO 9001:2015 certificate for Swaroop Formulation Industries Private Limited",
   },
   {
     standard: "ISO 13485:2016",
@@ -22,8 +23,9 @@ const certifications = [
     scope:
       "Manufacturing of plastic bio-medical and bio-degradable compostable waste bags and other packaging goods (medical device QMS context)",
     body: "US Certification body",
-    pdfLabel: "Certificate PDF",
-    pdfHref: "#",
+    verifyUrl: "https://www.uscert.co.uk",
+    imageSrc: "/certificates/C_2.png",
+    imageAlt: "ISO 13485:2016 certificate for Swaroop Formulation Industries Private Limited",
   },
 ];
 
@@ -39,8 +41,8 @@ export default function CertificationsPage() {
             Certifications
           </h1>
           <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-            Swaroop Formulation Industries maintains internationally recognized quality
-            certifications for manufacturing of biodegradable and biomedical packaging.
+            Zyrowaste / Swaroop Formulation Industries maintains internationally recognized
+            quality certifications for manufacturing of biodegradable and biomedical packaging.
           </p>
         </header>
 
@@ -96,17 +98,32 @@ export default function CertificationsPage() {
                   <p className="text-gray-600 leading-relaxed">{cert.scope}</p>
                 </div>
 
-                <div className="pt-2 mt-auto">
+                <figure className="rounded-xl border border-gray-100 bg-gray-50 overflow-hidden">
                   <a
-                    href={cert.pdfHref}
-                    className="inline-flex items-center justify-center w-full sm:w-auto px-5 py-2.5 rounded-lg bg-swaroop-600 text-white font-semibold text-sm hover:bg-swaroop-700 transition shadow-md shadow-swaroop-200"
+                    href={cert.imageSrc}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-swaroop-500"
                   >
-                    {cert.pdfLabel}
+                    <img
+                      src={cert.imageSrc}
+                      alt={cert.imageAlt}
+                      className="w-full h-auto object-contain max-h-[min(52vh,420px)] bg-white"
+                      loading="lazy"
+                    />
                   </a>
-                  <p className="text-xs text-gray-400 mt-2">
-                    PDF assets can be linked here when hosted in Level 3+.
-                  </p>
-                </div>
+                  <figcaption className="px-3 py-2 text-xs text-gray-500 flex flex-wrap items-center justify-between gap-2">
+                    <span>Issued to Swaroop Formulation Industries Pvt. Ltd.</span>
+                    <a
+                      href={cert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-swaroop-700 hover:text-swaroop-800"
+                    >
+                      Verify online
+                    </a>
+                  </figcaption>
+                </figure>
               </div>
             </article>
           ))}
@@ -164,7 +181,7 @@ export default function CertificationsPage() {
       </main>
 
       <footer className="py-6 text-center text-xs text-gray-500 border-t border-gray-100 bg-white">
-        Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
+        Zyrowaste · Swaroop Formulation Industries Pvt. Ltd. · Chukkusehri, Hasanganj, Unnao, UP 209841
       </footer>
     </div>
   );
